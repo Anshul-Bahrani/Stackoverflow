@@ -1,85 +1,53 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Stackoverflow
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## About
+A website inspired from stackoverflow wherein users can ask questions and/or answer to other's questions with an voting system from both the questions and answers alike.
 
-## About Laravel
+# User POV:
+- A platform to ask questions and/or answer some questions.
+- Get Notified with Mail about the answers posted on your question so you dont have to check again and again.
+- Mark the best possible answer to your question to mark the question as answered.
+- Upvote/Downvote a question/answer based on your opinion.
+- Check how many people viewed your/someother question.
+- Ask a question with trix editor inorder to truely say what you want to.
+- Restricted access so that only you can edit/delete your answers/questions(if not answered).
+- Get an overview about the question being unanswered/answers available/Answered without viewing the question itself.
+- Paginated view so that you dont have to scroll till eternity.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Developer POV:
+## Database:
+- The database included questions,answers,votes and other bridging tables
+- Votes can be of either question or answer so morph relation was used in laravel.
+- The filling of database at first was done using Seeder classes along with Factories of Models.
+- Along with that the notifications sent to users are stored and can be retrieved so that the user can view them again.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Question 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Model ###
 
-## Learning Laravel
+- Contains relationship methods:many(Question):one(User) with User
+- Containes Helper methods:markBestAnswer and other votes method to manage the votes of that question.
+- Containes accessor methods: which follow the getXXXAttribute way, so to access by an object of question we can do question->xxx to get it.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Controller ###
+- Resourceful Controller as standard as it can be...
+- BackEnd Validation of the data coming to the server to get stored in the DB using Request Subclasses Like CreateQuestionRequest.
+- CRUD Operations with an addition of softdeletes.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Views ###
+- Created using bootstrap includes all the features as mentioned in the User POV to get an idea.
 
-## Laravel Sponsors
+## Answer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Same Things as menthioned in the Questions Category...with middlewares and Validations and ResourceFul Controller and stuff.
 
-### Premium Partners
+And More controllers Like VotesController, FavoritiesController(To mark an answer as favorite) with standard working.. :)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
+## Policies
 
-### Community Sponsors
+In addidtion to this to have a better control over the access part, used Policies for Questions and Answers Controller so that no access violations are done.
 
-<a href="https://op.gg"><img src="http://opgg-static.akamaized.net/icon/t.rectangle.png" width="150"></a>
+## Notifications/NewReplyAdded
 
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [云软科技](http://www.yunruan.ltd/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The mailer of Laravel, If a new reply is added, the owner of the question is notified via Mail along with the same entry done in the database to view later on.
+- The server used for smtp was mailtrap.io.
